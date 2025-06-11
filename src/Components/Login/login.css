@@ -1,0 +1,110 @@
+/* login.css */
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom right, #0a0f2c, #000814);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #ffffff;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: radial-gradient(circle at center, #0a0f2c 30%, #000814 100%);
+    padding: 20px;
+}
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.login-form {
+    background-color: #111827;
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 0 25px #00b4ff33;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.login-form h2 {
+    text-align: center;
+    color: #00b4ff;
+    text-shadow: 0 0 10px #00b4ff88;
+}
+
+/* Input styling */
+.login-form input {
+    padding: 12px 15px;
+    border: 1px solid #1e3a5f;
+    border-radius: 10px;
+    background-color: #0f172a;
+    color: #e0f7ff;
+    font-size: 15px;
+    transition: border 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.login-form input:focus {
+    border-color: #00b4ff;
+    box-shadow: 0 0 12px #00b4ff88;
+}
+
+/* Button styling */
+.login-form button {
+    padding: 12px;
+    background: linear-gradient(to right, #0088cc, #00bfff);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00b4ff88;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.login-form button:hover {
+    background: #00e6ff;
+    transform: scale(1.05);
+}
+
+/* Toggle text */
+.toggle-text {
+    color: #00b4ff;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.toggle-text:hover {
+    color: #00e6ff;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,294 @@
+/* === Base Styles === */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0f2c, #00111a);
+    color: #e0e0e0;
+    overflow-x: hidden;
+    animation: backgroundShift 20s ease infinite;
+}
+
+@keyframes backgroundShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* === Main Container === */
+.main-container {
+    text-align: center;
+    padding: 40px 20px;
+    min-height: 100vh;
+}
+
+h2 {
+    font-size: 30px;
+    color: #00bfff;
+    text-shadow: 0 0 12px #00bfff, 0 0 24px #00bfff99;
+    margin-bottom: 40px;
+    animation: fadeInDown 1s ease;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* === Calendar === */
+.calendar-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.react-calendar {
+    background: #10172a;
+    border: 2px solid #1f2a44;
+    border-radius: 20px;
+    box-shadow: 0 0 30px #00bfff66;
+    color: #ffffff;
+    padding: 20px;
+    max-width: 90vw;
+    transition: all 0.4s ease;
+}
+
+.react-calendar__navigation {
+    background-color: transparent;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.react-calendar__navigation button {
+    color: #00bfff;
+    background: none;
+    font-size: 1.1rem;
+    border: none;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.react-calendar__navigation button:hover {
+    background-color: #002244;
+}
+
+.react-calendar__tile {
+    background: transparent;
+    border: none;
+    color: #cceeff;
+    font-weight: 500;
+    padding: 10px 6px;
+    border-radius: 10px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.react-calendar__tile:enabled:hover {
+    background-color: #003366;
+    transform: scale(1.05);
+    color: white;
+}
+
+.react-calendar__tile--now {
+    background: #005580 !important;
+    color: #ffffff !important;
+    font-weight: bold;
+    box-shadow: inset 0 0 10px #00bfff;
+}
+
+.react-calendar__tile--active {
+    background: #0099cc;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 8px #00e6ff;
+}
+
+.react-calendar__month-view__days__day:nth-child(7n),
+.react-calendar__month-view__days__day:nth-child(7n-1) {
+    color: #ff4d4d !important;
+    font-weight: bold;
+}
+
+.highlight {
+    background: linear-gradient(to right, #00e0ff, #00bfff);
+    color: #000 !important;
+    font-weight: bold;
+    border-radius: 12px;
+    box-shadow: 0 0 15px #00bfff99;
+}
+
+/* === Quote Banner === */
+.quote-banner {
+    background: rgba(0, 191, 255, 0.12);
+    border: 1px solid #00bfff44;
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px auto 40px auto;
+    max-width: 600px;
+    box-shadow: 0 0 20px #00bfff22;
+    animation: floatFade 3s ease-in-out infinite;
+}
+
+@keyframes floatFade {
+    0%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-5px);
+        opacity: 0.85;
+    }
+}
+
+.quote {
+    font-size: 18px;
+    font-style: italic;
+    color: #ccf3ff;
+    text-shadow: 0 0 6px #00bfff99;
+    line-height: 1.6;
+}
+
+/* === Bottom Fixed + Button === */
+.bottom-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.bottom-line {
+    position: absolute;
+    bottom: 40px;
+    width: 100%;
+    border-top: 2px solid #00bfff88;
+    background: transparent;
+    z-index: 900;
+    pointer-events: none;
+}
+
+/* Centered animated + button */
+.plus-button {
+    position: absolute;
+    bottom: 20px;
+    pointer-events: auto;
+    width: 70px;
+    height: 70px;
+    background: radial-gradient(circle, #00e0ff, #00bfff);
+    color: #000814;
+    font-size: 48px;
+    font-weight: bold;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #00e0ffaa, 0 0 40px #00bfff99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: pulse 2.5s infinite, floatIn 0.6s ease-out;
+}
+
+.plus-button:hover {
+    transform: scale(1.2);
+    background: #00f7ff;
+    box-shadow: 0 0 40px #00e0ff;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px #00e0ff66;
+    }
+    50% {
+        box-shadow: 0 0 30px #00e0ffcc;
+    }
+}
+
+@keyframes floatIn {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 600px) {
+    .react-calendar {
+        width: 100% !important;
+        padding: 10px;
+    }
+
+    .quote {
+        font-size: 16px;
+    }
+
+    .plus-button {
+        width: 60px;
+        height: 60px;
+        font-size: 40px;
+    }
+}
+/* === Header Bar === */
+.header-bar {
+    background: linear-gradient(to right, #00bfff33, #00111a33);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    animation: fadeInDown 1.2s ease-in-out;
+}
+
+.header-bar h2 {
+    margin: 0;
+    font-size: 28px;
+    color: #00e0ff;
+    text-shadow: 0 0 14px #00e0ff, 0 0 30px #00e0ff44;
+}
+
+/* === Entry Fade Effect === */
+.fade-in {
+    animation: fadeInSmooth 1.5s ease;
+}
+
+@keyframes fadeInSmooth {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* === Hover highlight effect on marked tiles === */
+.highlight:hover {
+    background: linear-gradient(to right, #00f7ff, #00e6ff);
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+/* main.css */
+.highlight {
+    background-color: #ffcb05;
+    color: #000;
+    border-radius: 50%;
+    font-weight: bold;
+}

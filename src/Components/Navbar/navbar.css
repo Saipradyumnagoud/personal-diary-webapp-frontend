@@ -1,0 +1,89 @@
+/* navbar.css */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 32px;
+    background: linear-gradient(to right, #0a0f2c, #000814);
+    border-bottom: 2px solid #00bfff33;
+    box-shadow: 0 0 15px #00bfff33;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Logo Styling */
+.navbar-logo .logo-link {
+    color: #00bfff;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+    text-shadow: 0 0 10px #00bfffaa;
+    transition: color 0.3s ease;
+}
+
+.navbar-logo .logo-link:hover {
+    color: #00e6ff;
+}
+
+/* Right-side actions */
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Login button */
+.login-button {
+    background: linear-gradient(to right, #0088cc, #00bfff);
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00bfff99;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.login-button:hover {
+    background: #00e6ff;
+    transform: scale(1.05);
+}
+
+/* User Dropdown */
+.user-dropdown {
+    position: relative;
+    color: #00e6ff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    text-shadow: 0 0 6px #00e6ff99;
+    transition: transform 0.2s ease;
+}
+
+.user-dropdown:hover {
+    transform: scale(1.05);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background-color: #10253b;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    box-shadow: 0 0 12px #00bfffaa;
+    white-space: nowrap;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    z-index: 1000;
+}
+
+.dropdown-menu:hover {
+    background-color: #003355;
+}
