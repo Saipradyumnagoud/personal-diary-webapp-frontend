@@ -28,7 +28,7 @@ const Main = () => {
         if (name) setUserName(name);
 
         if (token) {
-            fetch('http://localhost:5000/api/entries/dates/all', {
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/api/entries/dates/all`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
                 .then(res => res.json())

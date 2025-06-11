@@ -28,9 +28,7 @@ const Login = () => {
             return;
         }
 
-        const apiUrl = isSignup
-            ? 'http://localhost:5000/api/auth/signup'
-            : 'http://localhost:5000/api/auth/login';
+        const apiUrl = `${process.env.REACT_APP_BACKEND_URL}/api/auth/${isSignup ? 'signup' : 'login'}`;
 
         const payload = isSignup
             ? {

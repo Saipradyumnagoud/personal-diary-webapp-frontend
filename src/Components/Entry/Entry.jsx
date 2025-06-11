@@ -6,9 +6,10 @@ import { FiUpload } from 'react-icons/fi';
 import './entry.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-const moods = ['😊', '😢', '😠', '😴', '😇'];
 
-// ⬅️ Move FileUpload OUTSIDE Entry component
+const moods = ['😊', '😢', '😠', '😴', '😇'];
+const BASE_URL = process.env.REACT_APP_BACKEND_URL;
+
 const FileUpload = ({ handleImageChange }) => (
     <div className="upload-wrapper">
         <label htmlFor="file-upload" className="upload-icon">
@@ -42,12 +43,12 @@ const Entry = () => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
-        fetch(`http://localhost:5000/api/entries/${date}`, {
+        fetch(`${BASE_URL}/api/entries/${date}`, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(res => res.json())
             .then(data => setEntries(data.entries || []))
-            .catch(() => alert('Failed to fetch entry'));
+            .catch(() => toast.error('Failed to fetch entry'));
     }, [date]);
 
     const handleImageChange = (e) => {
@@ -71,40 +72,46 @@ const Entry = () => {
         images.forEach((img) => formData.append('images', img));
 
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:5000/api/entries', {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-            body: formData,
-        });
+        try {
+            const response = await fetch(`${BASE_URL}/api/entries`, {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${token}` },
+                body: formData,
+            });
 
-        if (response.ok) {
-            const data = await response.json();
-            setEntries(prev => [...prev, data.newEntry]);
-            setTitle('');
-            setText('');
-            setTags('');
-            setMood('');
-            setImages([]);
-            setPreview([]);
-            toast.success("Entry saved successfully!");
-        } else {
-            toast.error("Failed to save entry");
+            if (response.ok) {
+                const data = await response.json();
+                setEntries(prev => [...prev, data.newEntry]);
+                setTitle('');
+                setText('');
+                setTags('');
+                setMood('');
+                setImages([]);
+                setPreview([]);
+                toast.success("Entry saved successfully!");
+            } else {
+                toast.error("Failed to save entry");
+            }
+        } catch (error) {
+            toast.error("Network error while saving entry");
         }
     };
 
-
     const handleDelete = async (entryId) => {
         const token = localStorage.getItem('token');
-        const res = await fetch(`http://localhost:5000/api/entries/${entryId}`, {
-            method: 'DELETE',
-            headers: { Authorization: `Bearer ${token}` }
-        });
-        if (res.ok) {
-            setEntries(entries.filter(entry => entry._id !== entryId));
-        } else {
-            alert('Failed to delete entry');
+        try {
+            const res = await fetch(`${BASE_URL}/api/entries/${entryId}`, {
+                method: 'DELETE',
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            if (res.ok) {
+                setEntries(entries.filter(entry => entry._id !== entryId));
+                toast.success('Entry deleted');
+            } else {
+                toast.error('Failed to delete entry');
+            }
+        } catch {
+            toast.error('Network error while deleting');
         }
     };
 
@@ -119,10 +126,10 @@ const Entry = () => {
                     <div className="entry-card" key={i}>
                         <h4>{entry.title}</h4>
                         <p>{entry.text}</p>
-                        {entry.tags && <p><strong>Tags:</strong> {entry.tags.join(', ')}</p>}
+                        {entry.tags?.length > 0 && <p><strong>Tags:</strong> {entry.tags.join(', ')}</p>}
                         {entry.mood && <p><strong>Mood:</strong> {entry.mood}</p>}
                         {entry.images && entry.images.map((img, idx) => (
-                            <img key={idx} src={`http://localhost:5000${img}`} alt="Uploaded" className="entry-image" />
+                            <img key={idx} src={`${BASE_URL}${img}`} alt={`Uploaded ${idx}`} className="entry-image" />
                         ))}
                         <div className="entry-actions">
                             <button disabled>Edit</button>
@@ -154,9 +161,7 @@ const Entry = () => {
                     onClick={() => setShowEmojiPicker(!showEmojiPicker)}
                 >😀 Emoji</button>
 
-                {showEmojiPicker && (
-                    <Picker data={data} onEmojiSelect={addEmoji} />
-                )}
+                {showEmojiPicker && <Picker data={data} onEmojiSelect={addEmoji} />}
 
                 <input
                     type="text"
@@ -185,14 +190,13 @@ const Entry = () => {
 
                 <div className="preview-images">
                     {preview.map((src, i) => (
-                        <img key={i} src={src} alt="Preview" />
+                        <img key={i} src={src} alt={`Preview ${i}`} />
                     ))}
                 </div>
 
                 <button type="submit">Save Entry</button>
             </form>
             <ToastContainer position="top-center" autoClose={3000} />
-
         </div>
     );
 };
