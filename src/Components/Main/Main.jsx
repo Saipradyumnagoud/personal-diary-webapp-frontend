@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import './main.css';
+import Footer from '../Footer/Footer';
 
 const Main = () => {
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -52,7 +53,7 @@ const Main = () => {
             return;
         }
 
-        const formattedDate = date.toISOString().split('T')[0]; // always in yyyy-mm-dd
+        const formattedDate = date.toISOString().split('T')[0];
         navigate(`/entry/${formattedDate}`);
     };
 
@@ -60,7 +61,7 @@ const Main = () => {
         if (view === 'month') {
             const formatted = date.toISOString().split('T')[0];
             if (markedDates.has(formatted)) {
-                return 'highlight'; // class to style the tile
+                return 'highlight';
             }
         }
         return null;
@@ -84,9 +85,9 @@ const Main = () => {
                     tileClassName={tileClassName}
                 />
             </div>
-            <div className="bottom-container">
-                <div className="plus-button" onClick={handlePlusClick}>+</div>
-            </div>
+
+            {/* ✅ Replaced plus button with Footer component */}
+            <Footer onPlusClick={handlePlusClick} />
         </div>
     );
 };

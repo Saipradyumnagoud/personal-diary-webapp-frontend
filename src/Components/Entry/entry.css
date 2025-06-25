@@ -18,6 +18,25 @@ body {
     color: var(--text-color);
     transition: background 0.3s ease, color 0.3s ease;
 }
+.entry-images {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+.entry-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease;
+}
+
+.entry-image:hover {
+    transform: scale(1.05);
+}
 
 .entry-container {
     max-width: 850px;

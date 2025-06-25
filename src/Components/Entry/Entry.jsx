@@ -126,11 +126,26 @@ const Entry = () => {
                     <div className="entry-card" key={i}>
                         <h4>{entry.title}</h4>
                         <p>{entry.text}</p>
-                        {entry.tags?.length > 0 && <p><strong>Tags:</strong> {entry.tags.join(', ')}</p>}
-                        {entry.mood && <p><strong>Mood:</strong> {entry.mood}</p>}
-                        {entry.images && entry.images.map((img, idx) => (
-                            <img key={idx} src={`${BASE_URL}${img}`} alt={`Uploaded ${idx}`} className="entry-image" />
-                        ))}
+                        {entry.tags?.length > 0 && (
+                            <p><strong>Tags:</strong> {entry.tags.join(', ')}</p>
+                        )}
+                        {entry.mood && (
+                            <p><strong>Mood:</strong> {entry.mood}</p>
+                        )}
+
+                        {entry.images && entry.images.length > 0 && (
+                            <div className="entry-images">
+                                {entry.images.map((img, idx) => (
+                                    <img
+                                        key={idx}
+                                        src={`${BASE_URL}${img}`}
+                                        alt={`Uploaded ${idx}`}
+                                        className="entry-image"
+                                    />
+                                ))}
+                            </div>
+                        )}
+
                         <div className="entry-actions">
                             <button disabled>Edit</button>
                             <button onClick={() => handleDelete(entry._id)}>Delete</button>
@@ -138,6 +153,7 @@ const Entry = () => {
                     </div>
                 )) : <p>No entries for this date yet.</p>}
             </div>
+
 
             <form className="entry-form" onSubmit={handleSubmit}>
                 <h3>Add New Entry</h3>
